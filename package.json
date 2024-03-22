@@ -1,5 +1,6 @@
 {
   "name": "c12-project-2-starter",
+  "type": "module",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
