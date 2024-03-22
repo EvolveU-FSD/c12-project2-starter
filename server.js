@@ -10,21 +10,22 @@ app.get('/users', (req, res) => {
     res.send(UserData.getUsers())
 })
 
-// app.get('/user', (req, res) => {
-//     res.send(user)
-// })
+app.get('/user/:userId', (req, res)=>{
+    const userId = req.params.userId;
+    res.send(UserData.getUser(userId))
+})
 
-// app.post('/user', (req, res) => {
-//     user = req.body
-//     console.log('Got user', user)
-//     res.sendStatus(200)
-// })
+app.delete('/user/:userId', (req, res)=>{
+    const userId = req.params.userId;
+    UserData.deleteUser(userId);
+    res.status(200).send('Ok')
+})
 
-// app.delete('/user', (req, res) => {
-//     user = {}
-//     console.log('Deleting user!')
-//     res.sendStatus(200)
-// })
+app.post('/user', (req, res)=>{
+    var body = req.body;
+    UserData.addUser(body);
+    res.status(200).send('Ok')
+})
 
 console.log('Listening on port 3000')
 app.listen(3000)
