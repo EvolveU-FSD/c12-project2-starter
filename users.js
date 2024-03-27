@@ -1,28 +1,29 @@
-let users = [
-    {name: 'tony', team: 'oilers'},
-    {name: 'chris', teams: 'flames'}
-]
+import mongoose, { Schema } from "mongoose"
 
-export function getAllUsers(){
-    return users
+await mongoose.connect('mongodb://localhost:27017/c12App')
+
+const UserSchema = new Schema({
+    name: String,
+    team: String
+})
+const User = mongoose.model("user", UserSchema)
+
+export async function getAllUsers(){
+    return await User.find()
 }
 
-export function getUser(name){
-    const userRecord = users.find( record => 
-        {
-            return record.name == name  
-        })
-    return userRecord
+export async function getUserById(id){
+    return await User.findById(id) 
 }
 
-export function deleteUser(name){
-    users = users.filter(user => {
-        return user.name != name
-    })
+export async function deleteUser(id){
+    await User.findByIdAndDelete(id)     
 }
 
-export function addUser(newUser) {
-    users.push(newUser)
+export async function addUser(newUserData) {
+    const created = new User(newUserData)
+    await created.save()
+    return created
 }
 
 
