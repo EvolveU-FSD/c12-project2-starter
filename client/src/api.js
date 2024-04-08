@@ -2,7 +2,7 @@
 export async function getAllUsers() {
     const allUsersResponse = await fetch('/api/user')
     if (allUsersResponse.status !== 200) {
-        console.log(userResponse)
+        console.log(allUsersResponse)
         throw Error('Something is horribly wonrg')
     }
     return allUsersResponse.json()
