@@ -1,10 +1,18 @@
-import './App.css'
+import { useState } from 'react'
 import AllUsersPage from './pages/AllUsersPage'
 import UserPage from './pages/UserPage'
 
+import './App.css'
+
 function App() {
+
+  const [selectedUserId, setSelectedUserId] = useState()
+
   return (
-    <UserPage userId="6601b0b645fc771096c00e7e" />
+    <div>
+      { !selectedUserId && <AllUsersPage setSelectedUserId={setSelectedUserId} />}
+      { selectedUserId && <UserPage userId={selectedUserId} /> }
+    </div>
   )
 }
 
