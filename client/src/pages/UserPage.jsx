@@ -19,6 +19,6 @@ function UserPage({ userId }) {
             <div>team: { user.team }</div>
         </div>
     )
-  }
+}
 
 export default UserPage
