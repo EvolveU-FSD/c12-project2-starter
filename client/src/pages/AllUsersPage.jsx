@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react"
 import { getAllUsers } from "../api"
 
+function UserRow({ user }) {
+    return <div>{ user.name }</div>
+}
+
 function AllUsersPage() {
     const [allUsers, setAllUsers] = useState([])
     const [loadError, setLoadError] = useState()
@@ -24,7 +28,7 @@ function AllUsersPage() {
             <h1>All Users</h1>
             { loadError && <div>Error: { loadError.message }</div> }
             { allUsers.map((user) => (
-                <div key={user._id}> { user.name }</div>
+                <UserRow key={user._id} user={user} />
             ))}
             <div>User count: { allUsers.length }</div>
         </div>
