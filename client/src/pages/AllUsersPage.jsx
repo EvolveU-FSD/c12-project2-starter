@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react"
 import { getAllUsers } from "../api"
 
-function UserRow({ user, setSelectedUserId }) {
-    const userClicked = () => { setSelectedUserId(user._id) }
-
+function UserRow({ user }) {
+    const userClicked = () => { window.location.href = user._id }
     return <div onClick={userClicked}> { user.name } </div>
 }
 
 function AllUsersPage({ setSelectedUserId }) {
     const [allUsers, setAllUsers] = useState([])
     const [loadError, setLoadError] = useState()
+    const [userId, setUserId] = useState()
 
     async function loadUsers() {
         try {
@@ -30,7 +30,7 @@ function AllUsersPage({ setSelectedUserId }) {
             <h1>All Users</h1>
             { loadError && <div>Error: { loadError.message }</div> }
             { allUsers.map((user) => (
-                <UserRow key={user._id} user={user} setSelectedUserId={setSelectedUserId}/>
+                <UserRow key={user._id} user={user}/>
             ))}
             <div>User count: { allUsers.length }</div>
         </div>

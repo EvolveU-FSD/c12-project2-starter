@@ -1,20 +1,23 @@
 import { useEffect, useState } from "react"
 import { getUserById } from "../api"
+import { useParams } from 'react-router-dom'
 
-function UserPage({ userId }) {
+
+function UserPage() {
     const [user, setUser] = useState({ name: '', team: ''})
     const [loadError, setLoadError] = useState()
+    const { id } = useParams();
 
     useEffect(() => {
-        getUserById(userId)
+        getUserById(id)
             .then(setUser)
             .catch(setLoadError)
-    }, [userId])
+    }, [])
 
     return (
         <div>
             { loadError && <div>Error: { loadError.message }</div> }
-            <div>UserId: { userId }</div>
+            <div>UserId: { id }</div>
             <div>name: { user.name }</div>
             <div>team: { user.team }</div>
         </div>
