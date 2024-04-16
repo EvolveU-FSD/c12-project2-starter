@@ -4,9 +4,18 @@ import router from './reactRoutes'
 import { ThemeContext } from "./ThemeContext";
 import Header from "./Header";
 import { Button, ButtonGroup } from "@mui/material";
+import { styled } from '@mui/material/styles';
+import { purple } from '@mui/material/colors';
 
 import './App.css'
 
+const ColorButton = styled(Button)(({ theme }) => ({
+  color: theme.palette.getContrastText(purple[500]),
+  backgroundColor: purple[500],
+  '&:hover': {
+    backgroundColor: purple[700],
+  },
+}));
 
 function App() {
   const [selectedUserId, setSelectedUserId] = useState()
@@ -28,11 +37,13 @@ function App() {
         <Header />
         <ButtonGroup
         variant="contained"
+        size="large"
+        orientation="vertical"
         aria-label="outlined primary button group"
         >
-          <Button onClick={() => setRoute("/")}>
+          <ColorButton variant="text" onClick={() => setRoute("/")}>
             See All Users
-          </Button>
+          </ColorButton>
           <Button onClick={() => setRoute("/newuser")}>
             Create A User
           </Button>

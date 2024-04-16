@@ -11,14 +11,18 @@ import Paper from '@mui/material/Paper';
 
 function UserRow({ user }) {
     const userClicked = () => { window.location.href = user._id }
-    return <TableRow onClick={userClicked}
+    return (
+        user.name ? 
+            <TableRow onClick={userClicked}
                 key={user.name}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
                 <TableCell align="right">{user._id}</TableCell>
                 <TableCell align="right">{user.name}</TableCell>
                 <TableCell align="right">{user.team}</TableCell>
-            </TableRow>
+            </TableRow> 
+            : <></>
+        )
     // return <div onClick={userClicked}> { user.name } </div>
 
 }
@@ -50,23 +54,35 @@ function AllUsersPage({ setSelectedUserId }) {
     return (
         <div className={`app-header ${dark ? "dark" : ""}`}>
             <h1>All Users</h1>
-            <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>ID</TableCell>
-                            <TableCell align="right">Name</TableCell>
-                            <TableCell align="right">Team</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        { loadError && <div>Error: { loadError.message }</div> }
-                        { allUsers.map((user) => (
-                            <UserRow key={user._id} user={user}/>
-                         ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+            {/* <DataGrid
+            // rows={rows}
+            // columns={columns}
+            // initialState={{
+            // pagination: {
+            //     paginationModel: { page: 0, pageSize: 5 },
+            // },
+            // }}
+            // pageSizeOptions={[5, 10]}
+            checkboxSelection> */}
+
+                <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell align="right">ID</TableCell>
+                                <TableCell align="right">Name</TableCell>
+                                <TableCell align="right">Team</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            { loadError && <div>Error: { loadError.message }</div> }
+                            { allUsers.map((user) => (
+                                <UserRow key={user._id} user={user}/>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            {/* </DataGrid> */}
         </div>
     )
 }

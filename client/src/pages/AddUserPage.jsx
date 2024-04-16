@@ -36,18 +36,33 @@ function AddUserPage() {
             <h1>Add a New User!</h1>
             { loadError && <div>Error: { loadError.message }</div> }
             <Box
-            component="form"
-            sx={{
-                '& .MuiTextField-root': { m: 1, width: '25ch' },
-            }}
-            noValidate
-            autoComplete="off"
+                component="form"
+                sx={{
+                    '& .MuiTextField-root': { m: 1, width: '25ch' },
+                }}
+                // noValidate
+                autoComplete="off"
             >
                 <div>
-                    <TextField required id="outlined-basic" label="Your Name:" variant="outlined" input onChange={e=>setNewUserName(e.target.value)} />
+                    <TextField 
+                        required 
+                        id="filled-basic" 
+                        label="Your Name:" 
+                        variant="filled" 
+                        input 
+                        onChange={e=>setNewUserName(e.target.value)} 
+                    />
                 </div>
                 <div>
-                    <TextField required id="outlined-basic" label="Your Team:" variant="outlined" input onChange={e=>setNewTeamName(e.target.value)} />
+                    <TextField 
+                        required 
+                        // error={e=> typeof e.target.value === "number" ? false : true}
+                        id="outlined-basic" 
+                        label="Your Team:" 
+                        variant="outlined" 
+                        multiline
+                        input onChange={e=>setNewTeamName(e.target.value)} 
+                        />
                 </div>
                 <div>
                     <button onClick={()=>addUser({name:newUserName, team: newTeamName})}>Create New User</button>
