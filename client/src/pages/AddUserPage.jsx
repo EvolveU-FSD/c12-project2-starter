@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { updateUser } from "../api"
 import { useTheme } from "../ThemeContext";
+import { TextField } from '@mui/material';
+import Box from '@mui/material/Box';
 
 function UserRow({ user, setSelectedUserId }) {
     const userClicked = () => { setSelectedUserId(user._id) }
@@ -33,15 +35,24 @@ function AddUserPage() {
         <div className={`app-header ${dark ? "dark" : ""}`}>
             <h1>Add a New User!</h1>
             { loadError && <div>Error: { loadError.message }</div> }
-            <div>Your name:
-                <input type="text" value={newUserName} onChange={e=>setNewUserName(e.target.value)}/>
-            </div>
-            <div>Your team:
-                <input type="text" value={newTeamName} onChange={e=>setNewTeamName(e.target.value)}/>
-            </div>
-            <div>
-                <button onClick={()=>addUser({name:newUserName, team: newTeamName})}>Create New User</button>
-            </div>
+            <Box
+            component="form"
+            sx={{
+                '& .MuiTextField-root': { m: 1, width: '25ch' },
+            }}
+            noValidate
+            autoComplete="off"
+            >
+                <div>
+                    <TextField required id="outlined-basic" label="Your Name:" variant="outlined" input onChange={e=>setNewUserName(e.target.value)} />
+                </div>
+                <div>
+                    <TextField required id="outlined-basic" label="Your Team:" variant="outlined" input onChange={e=>setNewTeamName(e.target.value)} />
+                </div>
+                <div>
+                    <button onClick={()=>addUser({name:newUserName, team: newTeamName})}>Create New User</button>
+                </div>
+            </Box>  
         </div>
     )
 }
