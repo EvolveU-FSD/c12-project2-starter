@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react'
 import { RouterProvider } from 'react-router-dom'
 import router from './reactRoutes'
+import { ThemeContext } from "./ThemeContext";
+import Header from "./Header";
 
 import './App.css'
+
 
 function App() {
   const [selectedUserId, setSelectedUserId] = useState()
@@ -19,11 +22,14 @@ function App() {
   }
 
   return (
-    <div>
-      <button onClick={() => setRoute("/")}>See All Users</button>
-      <button onClick={() => setRoute("/newuser")}>Create A User</button>
-      <RouterProvider router={router}></RouterProvider>
-    </div>
+    <ThemeContext>
+      <div>
+        <Header />
+        <button onClick={() => setRoute("/")}>See All Users</button>
+        <button onClick={() => setRoute("/newuser")}>Create A User</button>
+        <RouterProvider router={router}></RouterProvider>
+      </div>
+    </ThemeContext>
   )
 }
 

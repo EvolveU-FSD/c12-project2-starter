@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { getAllUsers } from "../api"
+import { useTheme } from "../ThemeContext";
 
 function UserRow({ user }) {
     const userClicked = () => { window.location.href = user._id }
@@ -10,6 +11,7 @@ function AllUsersPage({ setSelectedUserId }) {
     const [allUsers, setAllUsers] = useState([])
     const [loadError, setLoadError] = useState()
     const [userId, setUserId] = useState()
+    const { dark, toggleDark } = useTheme();
 
     async function loadUsers() {
         try {
@@ -26,7 +28,7 @@ function AllUsersPage({ setSelectedUserId }) {
     }, [])
 
     return (
-        <div>
+        <div className={`app-header ${dark ? "dark" : ""}`}>
             <h1>All Users</h1>
             { loadError && <div>Error: { loadError.message }</div> }
             { allUsers.map((user) => (

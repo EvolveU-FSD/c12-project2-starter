@@ -66,3 +66,17 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.app-header {
+  background: #555;
+  color: white;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  transition: 0.2s;
+}
+
+.app-header.dark {
+  background: #000;
+  color: white;
+}

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { updateUser } from "../api"
+import { useTheme } from "../ThemeContext";
 
 function UserRow({ user, setSelectedUserId }) {
     const userClicked = () => { setSelectedUserId(user._id) }
@@ -12,6 +13,7 @@ function AddUserPage() {
     const [newUserName, setNewUserName] = useState("")
     const [newTeamName, setNewTeamName] = useState("")
     const [loadError, setLoadError] = useState()
+    const { dark, toggleDark } = useTheme();
 
     async function addUser(newUserInfo) {
         try {
@@ -28,7 +30,7 @@ function AddUserPage() {
     }, [])
 
     return (
-        <div>
+        <div className={`app-header ${dark ? "dark" : ""}`}>
             <h1>Add a New User!</h1>
             { loadError && <div>Error: { loadError.message }</div> }
             <div>Your name:
